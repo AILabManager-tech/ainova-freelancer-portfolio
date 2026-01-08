@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-stark-cyan/20;
+  }
+
+  body {
+    @apply bg-stark-black text-stark-cyan font-rajdhani overflow-x-hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-rajdhani font-bold;
+  }
+
+  code, pre {
+    @apply font-fira;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-stark-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-stark-cyan/30 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-stark-cyan/50;
+  }
+}
+
+@layer components {
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-stark-cyan/5 backdrop-blur-md border border-stark-cyan/20;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:bg-stark-cyan/10 hover:border-stark-cyan/40 hover:shadow-cyan-glow;
+  }
+
+  /* Glitch text effect */
+  .glitch {
+    position: relative;
+    animation: glitch 3s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 90%, 100% {
+      transform: translate(0);
+    }
+    92% {
+      transform: translate(-2px, 2px);
+    }
+    94% {
+      transform: translate(2px, -2px);
+    }
+    96% {
+      transform: translate(-1px, 1px);
+    }
+  }
+
+  /* Cyberpunk button */
+  .cyber-button {
+    @apply relative px-6 py-3 font-rajdhani font-bold tracking-wider uppercase;
+    @apply bg-transparent border-2 border-stark-cyan text-stark-cyan;
+    @apply transition-all duration-300;
+    @apply hover:bg-stark-cyan hover:text-stark-black hover:shadow-cyan-glow;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+  }
+
+  /* Overclock mode styles */
+  .overclock-active {
+    animation: overclock-pulse 0.5s infinite alternate;
+  }
+
+  @keyframes overclock-pulse {
+    0% {
+      filter: brightness(1) hue-rotate(0deg);
+    }
+    100% {
+      filter: brightness(1.2) hue-rotate(10deg);
+    }
+  }
+
+  /* Scanline effect */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 240, 255, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 240, 255, 0.03) 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Holographic card */
+  .holo-card {
+    @apply relative glass overflow-hidden;
+    @apply transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-cyan-glow;
+  }
+
+  .holo-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(0, 240, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: rotate(0deg);
+    transition: transform 0.6s;
+  }
+
+  .holo-card:hover::before {
+    transform: rotate(180deg);
+  }
+
+  /* Neon text */
+  .neon-text {
+    @apply text-stark-cyan;
+    text-shadow:
+      0 0 10px rgba(0, 240, 255, 0.8),
+      0 0 20px rgba(0, 240, 255, 0.6),
+      0 0 30px rgba(0, 240, 255, 0.4),
+      0 0 40px rgba(0, 240, 255, 0.2);
+  }
+
+  /* Grid background */
+  .cyber-grid {
+    background-image:
+      linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+/* Utility animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Overclock theme */
+body.overclock-mode {
+  @apply bg-gradient-to-br from-stark-black via-stark-red/20 to-stark-black;
+}
+
+body.overclock-mode .text-stark-cyan {
+  @apply text-stark-red;
+}
+
+body.overclock-mode .border-stark-cyan {
+  @apply border-stark-red;
+}
+
+body.overclock-mode .shadow-cyan-glow {
+  @apply shadow-red-glow;
+}
+
+body.overclock-mode .animate-rotate-slow {
+  @apply animate-rotate-fast;
+}
